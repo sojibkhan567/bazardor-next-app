@@ -7,6 +7,7 @@ type IncreasingProductsProps = {
 }
 
 const IncreasingProductPrice = ({ products }: IncreasingProductsProps) => {
+
     const increasingPrices = products
         .filter((product: ProductType) => product.change.dir === "up")
         .sort((a, b) => b.change.pct - a.change.pct)

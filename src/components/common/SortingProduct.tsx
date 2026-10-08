@@ -1,7 +1,11 @@
 import React from 'react'
 import ProductCard from './ProductCard'
+import { ProductType } from '@/types/ProductTypes'
 
-const SortingProduct = ({ products }) => {
+const SortingProduct = ({ products }: { products: ProductType[] }) => {
+    if (!products) {
+        return "No data found"
+    }
     return (
         <div className='flex flex-col gap-4'>
             <div className='flex flex-wrap items-center justify-between gap-2'>

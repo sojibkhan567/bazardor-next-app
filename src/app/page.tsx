@@ -18,7 +18,7 @@ export default async function Home() {
 
       <IncreasingProductPrice products={products} />
 
-      <DecreasingProductPrice />
+      <DecreasingProductPrice products={products} />
 
       <AllProducts products={products} />
     </div>

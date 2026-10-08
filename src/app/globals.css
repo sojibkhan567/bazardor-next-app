@@ -20,6 +20,10 @@ html {
     color: red;
   }
 
+  .price-down {
+    color: green;
+  }
+
   .text-success {
     color: green;
   }
