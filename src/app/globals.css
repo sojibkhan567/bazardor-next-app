@@ -24,9 +24,11 @@ html {
     color: green;
   }
 
+  .text-error {
+    color: #D03849;
+  }
+
   .btn-primary-2 {
     @apply bg-primary-2 text-white;
   }
 }
-
-

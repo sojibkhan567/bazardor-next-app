@@ -1,17 +1,23 @@
+"use client"
+import { ProductType } from '@/types/ProductTypes'
 import Link from 'next/link'
-import React from 'react'
 
-const ProductCard = () => {
+const ProductCard = ({ product }: { product: ProductType }) => {
+    if (!product) {
+        return "No data found";
+    }
+    console.log("ProductCard:", product);
+
     return (
         <>
             <Link href={"/product/onion"}>
                 <div className='border rounded-2xl border-base-300 bg-base-100 transition hover:border-primary-2 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary'>
                     <div className='flex flex-col text-[14px] gap-3 p-5'>
                         <div className='flex items-start gap-3'>
-                            <span aria-hidden="true" className="grid size-12 shrink-0 place-items-center rounded-xl bg-base-300 text-2xl">🧅</span>
+                            <span aria-hidden="true" className="grid size-12 shrink-0 place-items-center rounded-xl bg-base-300 text-2xl">{product.image}</span>
                             <div className="min-w-0">
-                                <h3 className="truncate text-base font-semibold">পেঁয়াজ</h3>
-                                <p className="text-xs text-base-content/60">প্রতি কেজি</p>
+                                <h3 className="truncate text-base font-semibold">{product.nameBn}</h3>
+                                <p className="text-xs text-base-content/60">প্রতি {product.unit}</p>
                             </div>
                         </div>
                         <div className="flex items-end justify-between gap-2">

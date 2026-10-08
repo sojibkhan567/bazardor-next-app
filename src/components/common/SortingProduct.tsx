@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductCard from './ProductCard'
 
-const SortingProduct = () => {
+const SortingProduct = ({ products }) => {
     return (
         <div className='flex flex-col gap-4'>
             <div className='flex flex-wrap items-center justify-between gap-2'>
@@ -17,27 +17,12 @@ const SortingProduct = () => {
                 </div>
             </div>
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <li className='contents'>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
-                <li>
-                    <ProductCard />
-                </li>
+                {products.map((product) => (
+                    <li key={product.id}>
+                        <ProductCard product={product} />
+                    </li>
+                ))}
+
             </ul>
         </div>
     )
