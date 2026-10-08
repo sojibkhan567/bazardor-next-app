@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --color-base-100: #FAFCFA;
@@ -6,49 +7,25 @@
   --color-base-300: #E1E8E1;
   --color-base-content: #1D271F;
 
-  --color-primary: #05893E;
+  --color-primary-2: #047F39;
   --color-secondary: #7c3aed;
-  --color-accent: #06b6d4;
+}
 
-  --color-error: #d03739;
-
-  --color-content: #0f172a;
-  --color-content-muted: #64748b;
+html {
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
-  .btn {
-    padding: 9px 18px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 1px solid transparent;
-  }
-
-  .btn-sm {
-    padding: 5px 12px;
-  }
-
-  .btn-ghost:hover {
-    background-color: var(--color-base-300);
-    border-color: #cbd3cb;
-    border-radius: 10px;
-  }
-  .btn-primary {
-    background-color: var(--color-primary);
-    color: #ffff;
-    border-color: #cbd3cb;
-    border-radius: 10px;
-  }
-  .btn-primary:hover {
-    background-color: #06803a;
-  }
-
   .price-up {
     color: red;
   }
 
   .text-success {
     color: green;
+  }
+
+  .btn-primary-2 {
+    @apply bg-primary-2 text-white;
   }
 }
 
