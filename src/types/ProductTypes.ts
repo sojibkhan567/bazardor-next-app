@@ -1,4 +1,4 @@
-interface Market {
+export interface Market {
   market: string;
   division: string;
   min: number;

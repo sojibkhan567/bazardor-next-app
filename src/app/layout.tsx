@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="bn" data-theme="light">
+    <html lang="bn" data-scroll-behavior="smooth" data-theme="light">
       <body className={`${hindSiliguri.variable} min-h-full flex flex-col bg-base-200 text-base-content`}>
         <Header />
         <Marquee />
