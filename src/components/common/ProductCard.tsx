@@ -1,5 +1,5 @@
 "use client"
-import { changeUnitBangla, convertToBanglaNumber } from '@/lib/formatNumber';
+import { changeUnitBangla, convertToBanglaNumber } from '@/utils/formatNumber';
 import { ProductType } from '@/types/ProductTypes'
 import Link from 'next/link'
 

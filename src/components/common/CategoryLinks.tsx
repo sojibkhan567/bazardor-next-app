@@ -10,7 +10,7 @@ interface Category {
     icon: string;
 }
 
-export default function CategoryLink({ nav }: { nav: Category }) {
+const CategoryLink = ({ nav }: { nav: Category }) => {
     const pathname = usePathname();
     const href = `/category/${nav.slug}`;
 
@@ -20,13 +20,12 @@ export default function CategoryLink({ nav }: { nav: Category }) {
         <Link
             href={href}
             aria-current={isActive ? "page" : undefined}
-            className={`btn btn-sm flex gap-2 ${isActive
-                ? "btn-primary-2"
-                : "btn-ghost"
-                }`}
+            className={`btn btn-sm flex gap-2 focus:outline-none ${isActive ? "btn-primary-2" : "btn-ghost"}`}
         >
             <span aria-hidden="true">{nav.icon}</span>
             <span>{nav.nameBn}</span>
         </Link>
     );
 }
+
+export default CategoryLink;
