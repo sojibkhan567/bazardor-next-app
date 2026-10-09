@@ -9,7 +9,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     }
     return (
         <>
-            <Link href={"/product/onion"}>
+            <Link href={`/product/${product.slug}`}>
                 <div className='border rounded-2xl border-base-300 bg-base-100 transition hover:border-primary-2 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary'>
                     <div className='flex flex-col text-[14px] gap-3 p-5'>
                         <div className='flex items-start gap-3'>

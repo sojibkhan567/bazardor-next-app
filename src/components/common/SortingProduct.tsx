@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductCard from './ProductCard'
 import { ProductType } from '@/types/ProductTypes'
+import { convertToBanglaNumber } from '@/lib/formatNumber'
 
 const SortingProduct = ({ products }: { products: ProductType[] }) => {
     if (!products) {
@@ -9,7 +10,7 @@ const SortingProduct = ({ products }: { products: ProductType[] }) => {
     return (
         <div className='flex flex-col gap-4'>
             <div className='flex flex-wrap items-center justify-between gap-2'>
-                <p className="text-sm text-base-content/70" aria-live="polite">মোট ৩৩টি পণ্য দেখানো হচ্ছে</p>
+                <p className="text-sm text-base-content/70" aria-live="polite">মোট {convertToBanglaNumber(products.length)}টি পণ্য দেখানো হচ্ছে</p>
 
                 <div className="flex items-center gap-2">
                     <label className="text-sm text-base-content/70" htmlFor="sort-products">সাজান</label>
