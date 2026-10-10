@@ -2,9 +2,10 @@ import ProductCategoryDetails from '@/components/product/ProductCategoryDetails'
 import ProductMarketDetails from '@/components/product/ProductMarketDetails';
 import ProductStatistics from '@/components/product/ProductStatistics';
 import { ProductType } from '@/types/ProductTypes';
-import { changeUnitBangla, convertToBanglaNumber } from '@/utils/formatNumber';
+import { changeUnitBangla } from '@/utils/formatNumber';
 import { Metadata } from 'next';
 import Link from 'next/link'
+import { notFound } from 'next/navigation';
 
 interface ProductPageProps {
   params: Promise<{ id: string; }>;
@@ -13,10 +14,18 @@ interface ProductPageProps {
 // fetch single product data by slug
 const getSingleProduct = async (id: string): Promise<ProductType> => {
   const res = await fetch(`${process.env.BASE_URL}/products/${id}`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch category");
+
+  if (res.status === 404) {
+    notFound();
   }
-  return res.json();
+
+  const product: ProductType | null = await res.json();
+
+  if (!product || !product.id) {
+    notFound();
+  }
+
+  return product;
 }
 
 // generate meta data 
@@ -33,7 +42,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 const ProductDetailsPage = async ({ params }: ProductPageProps) => {
   const { id } = await params;
 
+  // fetch product
   const product = await getSingleProduct(id);
+  console.log(product)
+  if (!product) {
+    return notFound();
+  }
 
   return (
     <div className='mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6'>

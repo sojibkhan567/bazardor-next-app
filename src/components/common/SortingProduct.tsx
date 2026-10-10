@@ -21,8 +21,9 @@ const SortingProduct = ({ products }: { products: ProductType[] }) => {
         }
     }, [products, sortOrder]);
 
-    if (!products) {
-        return "No data found"
+    // if product is empty
+    if (products.length === 0) {
+        return (<h1 className='text-2xl font-bold text-gray-700 text-center'>Category has no Products!</h1>)
     }
 
     return (

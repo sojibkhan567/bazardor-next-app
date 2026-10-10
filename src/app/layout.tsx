@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Marquee from "@/components/Marquee";
+import Header from "@/components/common/Header";
+import Marquee from "@/components/common/Marquee";
 import Footer from "@/components/common/Footer";
 
 const hindSiliguri = Hind_Siliguri({
@@ -10,7 +10,6 @@ const hindSiliguri = Hind_Siliguri({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-hind-siliguri',
 })
-
 
 export const metadata: Metadata = {
   title: "বাজার দর — আজকের দাঁড়ির দাম",

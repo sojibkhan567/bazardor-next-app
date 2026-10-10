@@ -12,9 +12,13 @@ const ProductCategoryDetails = ({ product }: { product: ProductType }) => {
                     <p className="mt-2 text-sm text-base-content/70">
                         গতকালের তুলনায় আজ দাম
                         {product.change.dir === "up" ? (
-                            <span className="font-semibold">{" "}বেড়েছে {convertToBanglaNumber(product.change.pct)}%</span>
+                            <span className="font-semibold">
+                                {" "}বেড়েছে {convertToBanglaNumber(product.change.pct)}%
+                            </span>
                         ) : product.change.dir === "down" ? (
-                            <span className="font-semibold">{" "}কমেছে {convertToBanglaNumber(product.change.pct)}%</span>
+                            <span className="font-semibold">
+                                {" "}কমেছে {convertToBanglaNumber(product.change.pct)}%
+                            </span>
                         ) : (
                             <span className='font-semibold'>{" "}অপরিবর্তিত</span>
                         )}

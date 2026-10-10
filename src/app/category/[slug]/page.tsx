@@ -1,6 +1,8 @@
 import SortingProduct from '@/components/common/SortingProduct'
 import { ProductType } from '@/types/ProductTypes';
+import { convertToBanglaNumber } from '@/utils/formatNumber';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 interface CategoryTypes {
     id: string
@@ -16,8 +18,8 @@ interface CategoryPageProps {
 // fetch single category by slug
 const getCategory = async (slug: string): Promise<CategoryTypes> => {
     const res = await fetch(`${process.env.BASE_URL}/categories/${slug}`);
-    if (!res.ok) {
-        throw new Error("Failed to fetch category");
+    if (res.status === 404) {
+        return notFound();
     }
     return res.json();
 }
@@ -40,16 +42,12 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
     // fetch single category by slug
     const category = await getCategory(slug);
     if (!category) {
-        return "No Data Found"
+        return notFound();
     }
 
     // fecth similar product by category
     const response = await fetch(`${process.env.BASE_URL}/products?category=${slug}`);
     const productData: ProductType[] = await response.json();
-
-    if (!productData) {
-        return "No Data Found"
-    }
 
     return (
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-6">
@@ -57,8 +55,8 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                 <div className="flex items-center gap-3">
                     <span aria-hidden="true" className="text-4xl">{category.icon}</span>
                     <div>
-                        <h1 className="text-2xl font-bold mb-2">{category.nameBn}</h1>
-                        <p className="text-sm text-base-content/70">৫টি পণ্যের আজকের দাম ও পরিবর্তন</p>
+                        <h1 className="text-2xl font-bold mb-1">{category.nameBn}</h1>
+                        <p className="text-sm text-base-content/70">{convertToBanglaNumber(productData.length)} টি পণ্যের আজকের দাম ও পরিবর্তন</p>
                     </div>
                 </div>
             </header>

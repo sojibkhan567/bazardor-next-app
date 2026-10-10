@@ -1,4 +1,4 @@
-import CategoryLink from './common/CategoryLinks';
+import CategoryLink from './CategoryLinks';
 
 interface Category {
     id: string;
