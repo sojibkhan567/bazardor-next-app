@@ -8,8 +8,13 @@ import {
     type SignInFormData,
 } from "@/lib/validations/auth.schema";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 export default function SignInForm() {
+    const [error, setError] = useState(false);
+
     const {
         register,
         handleSubmit,
@@ -23,14 +28,37 @@ export default function SignInForm() {
     });
 
     const onSubmit = async (data: SignInFormData) => {
-        console.log(data);
-
         // Call your authentication API here.
-        // Example: await signIn(data);
+        try {
+            const { data: user, error } = await authClient.signIn.email({
+                email: data.email,
+                password: data.password,
+                callbackURL: "/",
+            });
+
+            if (error) {
+                toast.error("ইমেইল অথবা পাসওয়ার্ড সঠিক নয়। আবার চেষ্টা করুন।");
+                setError(true)
+                return;
+            }
+
+            if (user) {
+                toast.success("সফলভাবে সাইন ইন হয়েছে।");
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
+            {error && (
+                <div role="alert" className="alert alert-error text-sm">
+                    <span aria-hidden="true">⚠️</span>
+                    <span>ইমেইল অথবা পাসওয়ার্ড সঠিক নয়। আবার চেষ্টা করুন।</span>
+                </div>
+            )}
 
             <label className="form-control w-full">
                 <span className="label-text mb-1 block font-medium">ইমেইল</span>
@@ -62,7 +90,12 @@ export default function SignInForm() {
                 )}
             </label>
 
-            <button type="submit" className="btn btn-primary-2 w-full" disabled={isSubmitting}>{isSubmitting ? "Signing in..." : "Sign In"}</button>
+            <button type="submit" className={`btn w-full ${isSubmitting ? "bg-gray-300 text-gray-500" : "btn-primary-2"}`} >
+                {isSubmitting && (
+                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                )}
+                সাইন ইন
+            </button>
 
             {/** social login btn */}
             <div className="divider my-0 text-xs">অথবা</div>

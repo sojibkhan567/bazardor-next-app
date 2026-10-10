@@ -5,12 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, type SignUpFormData, } from "@/lib/validations/auth.schema";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function SignUpForm() {
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<SignUpFormData>({
         resolver: zodResolver(signUpSchema),
         defaultValues: {
@@ -22,7 +26,6 @@ export default function SignUpForm() {
     });
 
     const onSubmit = async (data: SignUpFormData) => {
-        //console.log(data);
         // Send registration data to your API.
         try {
             const { data: user, error } = await authClient.signUp.email({
@@ -31,8 +34,17 @@ export default function SignUpForm() {
                 password: data.password,
                 callbackURL: "/",
             });
-            console.log(error)
-            console.log(user)
+
+            if (error) {
+                toast.error(error.message || "Sign up failed");
+                return;
+            }
+
+            if (user) {
+                toast.success("অ্যাকাউন্ট তৈরি হয়েছে! স্বাগতম।");
+                router.push("/");
+                router.refresh();
+            }
         } catch (error) {
             console.log(error)
         }
@@ -99,7 +111,12 @@ export default function SignUpForm() {
                 )}
             </label>
 
-            <button type="submit" className="btn btn-primary-2 w-full">অ্যাকাউন্ট তৈরি করুন</button>
+            <button type="submit" className={`btn w-full ${isSubmitting ? "bg-gray-300 text-gray-500" : "btn-primary-2"}`} >
+                {isSubmitting && (
+                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                )}
+                অ্যাকাউন্ট তৈরি করুন
+            </button>
 
             <div className="divider my-0 text-xs">অথবা</div>
             {/** socila sign up btn */}
