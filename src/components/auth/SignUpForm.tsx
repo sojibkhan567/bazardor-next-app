@@ -39,7 +39,8 @@ export default function SignUpForm() {
 
             if (error) {
                 toast.error(error.message || "Sign up failed");
-                return;
+                router.push("/");
+                router.refresh();
             }
 
             if (user) {
