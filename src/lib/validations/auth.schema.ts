@@ -17,7 +17,11 @@ export const signInSchema = z.object({
 // Sign-up validation
 export const signUpSchema = z
   .object({
-    name: z.string().trim().min(1, "নাম কমপক্ষে ২ অক্ষরের হতে হবে।"),
+    name: z
+      .string()
+      .trim()
+      .min(1, "নাম অবশ্যই দিতে হবে")
+      .min(2, "নাম কমপক্ষে ২ অক্ষরের হতে হবে।"),
 
     email: z
       .string()
@@ -37,5 +41,16 @@ export const signUpSchema = z
     path: ["confirmPassword"],
   });
 
+// profile update from validation
+export const profileUpdateSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "নাম অবশ্যই দিতে হবে")
+    .min(2, "নাম কমপক্ষে ২ অক্ষরের হতে হবে")
+    .max(100, "নাম সর্বোচ্চ ১০০ অক্ষরের হতে পারবে"),
+});
+
 export type SignInFormData = z.infer<typeof signInSchema>;
 export type SignUpFormData = z.infer<typeof signUpSchema>;
+export type ProfileUpdateFormData = z.infer<typeof profileUpdateSchema>;
