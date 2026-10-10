@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, type SignUpFormData, } from "@/lib/validations/auth.schema";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignUpForm() {
     const {
@@ -20,10 +21,21 @@ export default function SignUpForm() {
         },
     });
 
-    const onSubmit = (data: SignUpFormData) => {
-        console.log(data);
+    const onSubmit = async (data: SignUpFormData) => {
+        //console.log(data);
         // Send registration data to your API.
-        // Never store or log real passwords in production.
+        try {
+            const { data: user, error } = await authClient.signUp.email({
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                callbackURL: "/",
+            });
+            console.log(error)
+            console.log(user)
+        } catch (error) {
+            console.log(error)
+        }
     };
 
     return (
