@@ -33,7 +33,7 @@ const UserInfo = () => {
                     <span className="avatar avatar-placeholder">
                         <span className="w-10 h-10 flex items-center justify-center rounded-full bg-primary-2 text-primary-content sm:w-9">
                             {session?.user?.image ? (
-                                <Image src={session?.user?.image} width={40} height={40} alt='avatar' />
+                                <Image className='rounded-[50%]' src={session?.user?.image} width={40} height={40} alt='avatar' />
                             ) : (
                                 <p className="text-sm font-bold">{session.user.name?.charAt(0).toUpperCase()}</p>
                             )}

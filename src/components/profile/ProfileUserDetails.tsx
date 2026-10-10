@@ -40,7 +40,7 @@ const ProfileUserDetails = () => {
             <span className="avatar avatar-placeholder">
                 <span className="w-20 h-20 flex items-center justify-center rounded-full bg-primary-2 text-2xl text-primary-content">
                     {session?.user?.image ? (
-                        <Image src={session?.user?.image} width={40} height={40} alt='avatar' />
+                        <Image className='rounded-[50%]' src={session?.user?.image} width={40} height={40} alt='avatar' />
                     ) : (
                         <p className="text-4xl font-bold">{session?.user?.name?.charAt(0).toUpperCase()}</p>
                     )}

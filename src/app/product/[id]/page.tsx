@@ -42,9 +42,9 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 const ProductDetailsPage = async ({ params }: ProductPageProps) => {
   const { id } = await params;
 
-  // fetch product
+  // fetch product by id
   const product = await getSingleProduct(id);
-  console.log(product)
+
   if (!product) {
     return notFound();
   }
