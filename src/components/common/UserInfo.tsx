@@ -2,11 +2,9 @@
 import { authClient } from '@/lib/auth-client';
 import Image from 'next/image';
 import Link from 'next/link'
-import { usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 const UserInfo = () => {
-    const pathname = usePathname();
 
     const { data: session, isPending } = authClient.useSession();
 
@@ -64,8 +62,8 @@ const UserInfo = () => {
                 </div>
             ) : (
                 <>
-                    <Link href={"/sign-in"} className={`btn ${pathname === "/sign-in" ? "btn-primary-2" : "btn-ghost"}`}>সাইন ইন</Link>
-                    <Link href={"/sign-up"} className={`btn ${pathname === "/sign-up" ? "btn-primary-2" : "btn-ghost"}`}>সাইন আপ</Link>
+                    <Link href={"/sign-in"} className='btn btn-ghost'>সাইন ইন</Link>
+                    <Link href={"/sign-up"} className='btn btn-primary-2'>সাইন আপ</Link>
                 </>
             )}
         </div>
